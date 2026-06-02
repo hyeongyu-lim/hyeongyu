@@ -28,17 +28,43 @@ npm run build    # production build → dist/
 npm run preview  # preview the build locally
 ```
 
-## GitHub Pages
+## GitHub Pages (GitHub Actions)
 
-1. Edit `astro.config.mjs`:
-   - `site`: `https://<your-username>.github.io`
-   - `base`: `/<repository-name>/` (use `'/'` for a user/org site repo named `<username>.github.io`)
+Deployment is automated via [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml). Pull requests are built (without deploy) by [`.github/workflows/ci.yml`](.github/workflows/ci.yml).
 
-2. Push to GitHub. Enable **Settings → Pages → Build and deployment → GitHub Actions**.
+### One-time setup
 
-3. The included workflow (`.github/workflows/deploy.yml`) builds and deploys on pushes to `main`.
+1. Push this repository to GitHub (e.g. `your-username/academic-portfolio`).
+2. Open **Settings → Pages → Build and deployment**.
+3. Set **Source** to **GitHub Actions** (not “Deploy from a branch”).
+4. Push to `main` (or run the workflow manually under **Actions → Deploy to GitHub Pages → Run workflow**).
 
-4. Place your CV at `public/cv.pdf` for the download link on `/cv`.
+Your site will be published at:
+
+- **Project repository:** `https://<username>.github.io/<repository-name>/`
+- **User site** (repo named `<username>.github.io`): `https://<username>.github.io/`
+
+`astro.config.mjs` reads `GITHUB_REPOSITORY` in Actions and sets `site` and `base` automatically. For local overrides, copy [`.env.example`](.env.example) to `.env` and set `ASTRO_SITE` / `ASTRO_BASE`.
+
+### Workflows
+
+| File | Trigger | Purpose |
+|------|---------|---------|
+| `.github/workflows/deploy.yml` | Push to `main`, manual | Build `dist/` and deploy to GitHub Pages |
+| `.github/workflows/ci.yml` | PR and push to `main` | `astro check` + build (no deploy) |
+
+### Local preview (production paths)
+
+```bash
+GITHUB_REPOSITORY=your-username/academic-portfolio npm run build
+npm run preview
+```
+
+Then open the URL shown in the terminal (includes the `/academic-portfolio/` base path).
+
+### CV download
+
+Place `public/cv.pdf` for the link on `/cv`.
 
 ## Customization
 
