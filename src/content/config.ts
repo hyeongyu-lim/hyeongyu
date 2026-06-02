@@ -1,22 +1,54 @@
 import { defineCollection, z } from "astro:content";
 
-const blog = defineCollection({
+const noteCategories = [
+  "paper-review",
+  "numerical-methods",
+  "control-systems",
+  "manufacturing",
+  "ai-engineering",
+  "general",
+] as const;
+
+const researchCategories = [
+  "mechanics",
+  "thermodynamics",
+  "controls",
+  "manufacturing",
+  "materials",
+  "computation",
+] as const;
+
+const projectCategories = [
+  "engineering",
+  "hardware",
+  "software",
+  "capstone",
+] as const;
+
+const publicationTypes = [
+  "journal",
+  "conference",
+  "poster",
+  "presentation",
+] as const;
+
+const notes = defineCollection({
   type: "content",
   schema: z.object({
     title: z.string(),
     description: z.string(),
     date: z.coerce.date(),
-    draft: z.boolean().optional()
+    category: z.enum(noteCategories).default("general"),
+    draft: z.boolean().optional(),
   }),
 });
 
-const work = defineCollection({
+const research = defineCollection({
   type: "content",
   schema: z.object({
-    company: z.string(),
-    role: z.string(),
-    dateStart: z.coerce.date(),
-    dateEnd: z.union([z.coerce.date(), z.string()]),
+    title: z.string(),
+    category: z.enum(researchCategories),
+    order: z.number().default(0),
   }),
 });
 
@@ -26,10 +58,31 @@ const projects = defineCollection({
     title: z.string(),
     description: z.string(),
     date: z.coerce.date(),
+    category: z.enum(projectCategories).default("engineering"),
     draft: z.boolean().optional(),
     demoURL: z.string().optional(),
-    repoURL: z.string().optional()
+    repoURL: z.string().optional(),
   }),
 });
 
-export const collections = { blog, work, projects };
+const publications = defineCollection({
+  type: "content",
+  schema: z.object({
+    title: z.string(),
+    authors: z.string(),
+    venue: z.string(),
+    year: z.coerce.number(),
+    type: z.enum(publicationTypes),
+    link: z.string().url().optional(),
+    draft: z.boolean().optional(),
+  }),
+});
+
+export const collections = { notes, research, projects, publications };
+
+export {
+  noteCategories,
+  researchCategories,
+  projectCategories,
+  publicationTypes,
+};

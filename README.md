@@ -1,64 +1,52 @@
-![Astro Nano](_astro_nano.png)
+# Academic Portfolio
 
-Astro Nano is a static, minimalist, lightweight, lightning fast portfolio and blog theme.
+A minimal, research-oriented academic website built with [Astro Nano](https://github.com/markhorn-dev/astro-nano). Designed for long-term maintenance across undergraduate study, graduate school, and PhD applications.
 
-Built with Astro, Tailwind and Typescript, an no frameworks.
+## Structure
 
-It was designed as an even more minimal theme than my popular theme [Astro Sphere](https://github.com/markhorn-dev/astro-sphere)
+| Path | Purpose |
+|------|---------|
+| `src/consts.ts` | Site name, email, featured interests, social links |
+| `src/content/notes/` | Research notes (Markdown knowledge base) |
+| `src/content/research/` | Research interest topics by category |
+| `src/content/projects/` | Engineering / hardware / software / capstone projects |
+| `src/content/publications/` | Papers, posters, presentations |
+| `src/pages/` | Static pages: about, resources, cv |
+| `public/` | Static assets; add `cv.pdf` for download |
 
-## 🚀 Deploy your own
+## Local development
 
-[![Deploy with Vercel](_deploy_vercel.svg)](https://vercel.com/new/clone?repository-url=https://github.com/markhorn-dev/astro-nano)  [![Deploy with Netlify](_deploy_netlify.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/markhorn-dev/astro-nano)
+```bash
+npm install
+npm run dev
+```
 
-## 📋 Features
+Open [http://localhost:4321](http://localhost:4321). If you set a `base` path in `astro.config.mjs` for GitHub Pages, use `http://localhost:4321<base>/` (e.g. `http://localhost:4321/academic-portfolio/`).
 
-- ✅ 100/100 Lighthouse performance
-- ✅ Responsive
-- ✅ Accessible
-- ✅ SEO-friendly
-- ✅ Typesafe
-- ✅ Minimal style
-- ✅ Light/Dark Theme
-- ✅ Animated UI
-- ✅ Tailwind styling
-- ✅ Auto generated sitemap
-- ✅ Auto generated RSS Feed
-- ✅ Markdown support
-- ✅ MDX Support (components in your markdown)
+```bash
+npm run build    # production build → dist/
+npm run preview  # preview the build locally
+```
 
-## 💯 Lighthouse score
-![Astro Nano Lighthouse Score](_lighthouse.png)
+## GitHub Pages
 
-## 🕊️ Lightweight
-No frameworks or added bulk
+1. Edit `astro.config.mjs`:
+   - `site`: `https://<your-username>.github.io`
+   - `base`: `/<repository-name>/` (use `'/'` for a user/org site repo named `<username>.github.io`)
 
-## ⚡︎ Fast
-Rendered in ~40ms on localhost
+2. Push to GitHub. Enable **Settings → Pages → Build and deployment → GitHub Actions**.
 
-## 📄 Configuration
+3. The included workflow (`.github/workflows/deploy.yml`) builds and deploys on pushes to `main`.
 
-The blog posts on the demo serve as the documentation and configuration.
+4. Place your CV at `public/cv.pdf` for the download link on `/cv`.
 
-## 💻 Commands
+## Customization
 
-All commands are run from the root of the project, from a terminal:
+- Update `src/consts.ts` with your name, email, and links.
+- Replace placeholder Markdown in `src/content/`.
+- Set `draft: true` on entries you are not ready to publish.
+- LaTeX in Markdown: use `$...$` or `$$...$$` (KaTeX via `remark-math` / `rehype-katex`).
 
-Replace npm with your package manager of choice. `npm`, `pnpm`, `yarn`, `bun`, etc
+## License
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run dev:network`     | Starts local dev server on local network         |
-| `npm run sync`            | Generates TypeScript types for all Astro modules.|
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run preview:network` | Preview build on local network                   |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-| `npm run lint`            | Run ESLint                                       |
-| `npm run lint:fix`        | Auto-fix ESLint issues                           |
-
-## 🏛️ License
-
-MIT
+MIT (template); your content is your own.

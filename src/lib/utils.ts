@@ -5,6 +5,20 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
+/** Prefix internal paths with Astro `base` (GitHub Pages subpath). */
+export function withBase(path: string): string {
+  if (/^(https?:|mailto:)/.test(path)) {
+    return path;
+  }
+  const base = import.meta.env.BASE_URL;
+  if (!path || path === "/") {
+    return base;
+  }
+  const normalized = path.startsWith("/") ? path.slice(1) : path;
+  const prefix = base.endsWith("/") ? base : `${base}/`;
+  return `${prefix}${normalized}`;
+}
+
 export function formatDate(date: Date) {
   return Intl.DateTimeFormat("en-US", {
     month: "short",

@@ -2,6 +2,16 @@
 import Container from "@components/Container.astro";
 import Link from "@components/Link.astro";
 import { SITE } from "@consts";
+
+const nav = [
+  { href: "/about", label: "about" },
+  { href: "/research", label: "research" },
+  { href: "/projects", label: "projects" },
+  { href: "/notes", label: "notes" },
+  { href: "/publications", label: "publications" },
+  { href: "/resources", label: "resources" },
+  { href: "/cv", label: "cv" },
+];
 ---
 
 <header>
@@ -12,22 +22,15 @@ import { SITE } from "@consts";
           {SITE.NAME}
         </div>
       </Link>
-      <nav class="flex gap-1">
-        <Link href="/blog">
-          blog
-        </Link>
-        <span>
-          {`/`}
-        </span>
-        <Link href="/work">
-          work
-        </Link>
-        <span>
-          {`/`}
-        </span>
-        <Link href="/projects">
-          projects
-        </Link>
+      <nav class="flex flex-wrap gap-x-1 gap-y-1 items-center">
+        {
+          nav.map((item, i) => (
+            <>
+              {i > 0 && <span>{`/`}</span>}
+              <Link href={item.href}>{item.label}</Link>
+            </>
+          ))
+        }
       </nav>
     </div>
   </Container>

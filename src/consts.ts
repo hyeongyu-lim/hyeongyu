@@ -1,44 +1,74 @@
 import type { Site, Metadata, Socials } from "@types";
 
 export const SITE: Site = {
-  NAME: "Astro Nano",
-  EMAIL: "markhorn.dev@gmail.com",
-  NUM_POSTS_ON_HOMEPAGE: 3,
-  NUM_WORKS_ON_HOMEPAGE: 2,
+  NAME: "Your Name",
+  TAGLINE: "Mechanical Engineering",
+  EMAIL: "you@university.edu",
+  NUM_NOTES_ON_HOMEPAGE: 3,
   NUM_PROJECTS_ON_HOMEPAGE: 3,
 };
 
 export const HOME: Metadata = {
   TITLE: "Home",
-  DESCRIPTION: "Astro Nano is a minimal and lightweight blog and portfolio.",
+  DESCRIPTION:
+    "Academic portfolio — mechanical engineering research, projects, and notes.",
 };
 
-export const BLOG: Metadata = {
-  TITLE: "Blog",
-  DESCRIPTION: "A collection of articles on topics I am passionate about.",
+export const ABOUT: Metadata = {
+  TITLE: "About",
+  DESCRIPTION: "Academic background, skills, and research direction.",
 };
 
-export const WORK: Metadata = {
-  TITLE: "Work",
-  DESCRIPTION: "Where I have worked and what I have done.",
+export const RESEARCH: Metadata = {
+  TITLE: "Research Interests",
+  DESCRIPTION: "Broad engineering interests organized by area.",
 };
 
 export const PROJECTS: Metadata = {
   TITLE: "Projects",
-  DESCRIPTION: "A collection of my projects, with links to repositories and demos.",
+  DESCRIPTION: "Engineering, hardware, software, and capstone projects.",
 };
 
+export const NOTES: Metadata = {
+  TITLE: "Research Notes",
+  DESCRIPTION:
+    "Markdown knowledge base — paper reviews, methods, and engineering topics.",
+};
+
+export const PUBLICATIONS: Metadata = {
+  TITLE: "Publications & Presentations",
+  DESCRIPTION: "Journal articles, conference papers, posters, and talks.",
+};
+
+export const RESOURCES: Metadata = {
+  TITLE: "Resources",
+  DESCRIPTION: "Books, courses, software, and learning materials.",
+};
+
+export const CV: Metadata = {
+  TITLE: "CV",
+  DESCRIPTION: "Academic curriculum vitae.",
+};
+
+/** Featured interests shown on the home page — edit as your focus evolves */
+export const FEATURED_INTERESTS: string[] = [
+  "Solid mechanics & materials",
+  "Dynamics & control",
+  "Numerical simulation",
+  "Design & manufacturing",
+];
+
 export const SOCIALS: Socials = [
-  { 
-    NAME: "twitter-x",
-    HREF: "https://twitter.com/markhorn_dev",
-  },
-  { 
+  {
     NAME: "github",
-    HREF: "https://github.com/markhorn-dev"
+    HREF: "https://github.com/your-username",
   },
-  { 
+  {
     NAME: "linkedin",
-    HREF: "https://www.linkedin.com/in/markhorn-dev",
-  }
+    HREF: "https://www.linkedin.com/in/your-profile",
+  },
+  {
+    NAME: "orcid",
+    HREF: "https://orcid.org/0000-0000-0000-0000",
+  },
 ];

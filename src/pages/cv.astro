@@ -1,0 +1,66 @@
+---
+import Container from "@components/Container.astro";
+import PageLayout from "@layouts/PageLayout.astro";
+import Link from "@components/Link.astro";
+import { CV, SITE } from "@consts";
+---
+
+<PageLayout title={CV.TITLE} description={CV.DESCRIPTION}>
+  <Container>
+    <div class="space-y-10">
+      <div class="animate flex flex-wrap gap-y-2 items-center justify-between">
+        <h1 class="font-semibold text-black dark:text-white">
+          Curriculum vitae
+        </h1>
+        <p class="text-sm">
+          PDF:
+          <Link href="/cv.pdf">Download</Link>
+          (place <code class="font-sans text-xs">cv.pdf</code> in
+          <code class="font-sans text-xs">public/</code> when ready)
+        </p>
+      </div>
+
+      <section class="animate space-y-4">
+        <h2 class="font-semibold text-black dark:text-white">Education</h2>
+        <article class="font-serif space-y-2">
+          <p>
+            <strong>B.S., Mechanical Engineering</strong> — University Name
+            (expected 20XX)
+          </p>
+        </article>
+      </section>
+
+      <section class="animate space-y-4">
+        <h2 class="font-semibold text-black dark:text-white">Research experience</h2>
+        <article class="font-serif">
+          <p>— Add labs, advisors, and project summaries.</p>
+        </article>
+      </section>
+
+      <section class="animate space-y-4">
+        <h2 class="font-semibold text-black dark:text-white">Publications</h2>
+        <article class="font-serif">
+          <p>
+            See
+            <Link href="/publications">Publications & presentations</Link> for a
+            full list.
+          </p>
+        </article>
+      </section>
+
+      <section class="animate space-y-4">
+        <h2 class="font-semibold text-black dark:text-white">Skills</h2>
+        <article class="font-serif">
+          <p>— Summarize technical skills; mirror or expand the About page.</p>
+        </article>
+      </section>
+
+      <section class="animate space-y-4">
+        <h2 class="font-semibold text-black dark:text-white">Contact</h2>
+        <article class="font-serif">
+          <p>{SITE.EMAIL}</p>
+        </article>
+      </section>
+    </div>
+  </Container>
+</PageLayout>

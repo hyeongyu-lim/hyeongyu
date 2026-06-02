@@ -1,0 +1,63 @@
+---
+import Container from "@components/Container.astro";
+import PageLayout from "@layouts/PageLayout.astro";
+import Link from "@components/Link.astro";
+import { ABOUT } from "@consts";
+---
+
+<PageLayout title={ABOUT.TITLE} description={ABOUT.DESCRIPTION}>
+  <Container>
+    <div class="space-y-10">
+      <h1 class="animate font-semibold text-black dark:text-white">About</h1>
+
+      <section class="animate space-y-4">
+        <h2 class="font-semibold text-black dark:text-white">
+          Academic background
+        </h2>
+        <article class="space-y-3">
+          <p>
+            B.S. in Mechanical Engineering (in progress). Update this section
+            with your institution, expected graduation year, relevant coursework,
+            and honors.
+          </p>
+        </article>
+      </section>
+
+      <section class="animate space-y-4">
+        <h2 class="font-semibold text-black dark:text-white">Technical skills</h2>
+        <article>
+          <ul class="list-disc list-inside font-serif space-y-1">
+            <li>Programming: Python, MATLAB, C++ (adjust to your stack)</li>
+            <li>Simulation: FEA, CFD, multibody dynamics (as applicable)</li>
+            <li>Design: CAD, drafting standards, prototyping</li>
+            <li>Lab: measurement, data acquisition, uncertainty analysis</li>
+          </ul>
+        </article>
+      </section>
+
+      <section class="animate space-y-4">
+        <h2 class="font-semibold text-black dark:text-white">
+          Engineering interests
+        </h2>
+        <article>
+          <p>
+            Solid mechanics, dynamics and control, thermal systems, and
+            computational methods. See
+            <Link href="/research">Research interests</Link> for organized topics.
+          </p>
+        </article>
+      </section>
+
+      <section class="animate space-y-4">
+        <h2 class="font-semibold text-black dark:text-white">Future goals</h2>
+        <article>
+          <p>
+            Pursue graduate study in mechanical engineering, contribute to
+            experimental and computational research, and prepare for doctoral
+            applications in my areas of interest.
+          </p>
+        </article>
+      </section>
+    </div>
+  </Container>
+</PageLayout>

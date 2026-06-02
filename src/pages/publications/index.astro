@@ -1,0 +1,52 @@
+---
+import { getCollection } from "astro:content";
+import PageLayout from "@layouts/PageLayout.astro";
+import Container from "@components/Container.astro";
+import PublicationEntry from "@components/PublicationEntry.astro";
+import { PUBLICATIONS } from "@consts";
+import { publicationTypes } from "@content/config";
+import { PUBLICATION_TYPE_LABELS } from "@lib/labels";
+
+const entries = (await getCollection("publications"))
+  .filter((p) => !p.data.draft)
+  .sort((a, b) => b.data.year - a.data.year);
+
+const byType = publicationTypes.map((type) => ({
+  type,
+  label: PUBLICATION_TYPE_LABELS[type],
+  items: entries.filter((e) => e.data.type === type),
+}));
+---
+
+<PageLayout title={PUBLICATIONS.TITLE} description={PUBLICATIONS.DESCRIPTION}>
+  <Container>
+    <div class="space-y-10">
+      <div class="animate space-y-3">
+        <h1 class="font-semibold text-black dark:text-white">
+          Publications & presentations
+        </h1>
+        <p class="text-sm">
+          Add entries under
+          <code class="font-sans text-xs">src/content/publications/</code> as you
+          publish work.
+        </p>
+      </div>
+
+      {
+        byType.map(
+          ({ label, items }) =>
+            items.length > 0 && (
+              <section class="animate space-y-4">
+                <h2 class="font-semibold text-black dark:text-white">{label}</h2>
+                <ul class="flex flex-col gap-6">
+                  {items.map((entry) => (
+                    <PublicationEntry entry={entry} />
+                  ))}
+                </ul>
+              </section>
+            ),
+        )
+      }
+    </div>
+  </Container>
+</PageLayout>
