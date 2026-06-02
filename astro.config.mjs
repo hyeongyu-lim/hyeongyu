@@ -28,7 +28,7 @@ function githubPagesConfig() {
     (owner ? `https://${owner}.github.io` : "https://your-username.github.io");
 
   const base =
-    baseOverride ?? (isUserSite ? "/" : repo ? `/${repo}/` : "/academic-portfolio/");
+    baseOverride ?? (isUserSite ? "/" : repo ? `/${repo}/` : "hyeongyu/");
 
   return { site, base: base.endsWith("/") || base === "/" ? base : `${base}/` };
 }
