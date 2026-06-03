@@ -1,4 +1,5 @@
 import { defineConfig } from "astro/config";
+import content from "@astrojs/content";
 import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
 import tailwind from "@astrojs/tailwind";
@@ -28,7 +29,7 @@ function githubPagesConfig() {
     (owner ? `https://${owner}.github.io` : "https://your-username.github.io");
 
   const base =
-    baseOverride ?? (isUserSite ? "/" : repo ? `/${repo}/` : "hyeongyu/");
+    baseOverride ?? (isUserSite ? "/" : repo ? `/${repo}/` : "/");
 
   return { site, base: base.endsWith("/") || base === "/" ? base : `${base}/` };
 }
@@ -38,7 +39,7 @@ const { site, base } = githubPagesConfig();
 export default defineConfig({
   site,
   base,
-  integrations: [mdx(), sitemap(), tailwind()],
+  integrations: [content(), mdx(), sitemap(), tailwind()],
   markdown: {
     remarkPlugins: [remarkMath],
     rehypePlugins: [rehypeKatex],
