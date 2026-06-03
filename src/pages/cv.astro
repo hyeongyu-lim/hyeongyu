@@ -2,6 +2,7 @@
 import Container from "@components/Container.astro";
 import PageLayout from "@layouts/PageLayout.astro";
 import Link from "@components/Link.astro";
+import EmptySlot from "@components/EmptySlot.astro";
 import { CV, SITE } from "@consts";
 ---
 
@@ -12,10 +13,10 @@ import { CV, SITE } from "@consts";
         <h1 class="font-semibold text-black dark:text-white">
           Curriculum vitae
         </h1>
-        <p class="text-sm">
+        <p class="text-sm text-black/60 dark:text-white/60">
           PDF:
           <Link href="/cv.pdf">Download</Link>
-          (place <code class="font-sans text-xs">cv.pdf</code> in
+          (add <code class="font-sans text-xs">cv.pdf</code> to
           <code class="font-sans text-xs">public/</code> when ready)
         </p>
       </div>
@@ -24,41 +25,42 @@ import { CV, SITE } from "@consts";
         <h2 class="font-semibold text-black dark:text-white">Education</h2>
         <article class="font-serif space-y-2">
           <p>
-            <strong>B.S., Mechanical Engineering</strong> — University Name
-            (expected 20XX)
+            <strong>{SITE.DEGREE}, {SITE.TAGLINE}</strong> — {SITE.INSTITUTION}
+            ({SITE.EDUCATION_PERIOD})
           </p>
         </article>
       </section>
 
       <section class="animate space-y-4">
         <h2 class="font-semibold text-black dark:text-white">Research experience</h2>
-        <article class="font-serif">
-          <p>— Add labs, advisors, and project summaries.</p>
+        <article>
+          <EmptySlot />
         </article>
       </section>
 
       <section class="animate space-y-4">
         <h2 class="font-semibold text-black dark:text-white">Publications</h2>
-        <article class="font-serif">
+        <article class="font-serif text-sm">
           <p>
             See
-            <Link href="/publications">Publications & presentations</Link> for a
-            full list.
+            <Link href="/publications">Publications & presentations</Link>.
           </p>
         </article>
       </section>
 
       <section class="animate space-y-4">
         <h2 class="font-semibold text-black dark:text-white">Skills</h2>
-        <article class="font-serif">
-          <p>— Summarize technical skills; mirror or expand the About page.</p>
+        <article>
+          <EmptySlot />
         </article>
       </section>
 
       <section class="animate space-y-4">
         <h2 class="font-semibold text-black dark:text-white">Contact</h2>
         <article class="font-serif">
-          <p>{SITE.EMAIL}</p>
+          <p>
+            <Link href={`mailto:${SITE.EMAIL}`}>{SITE.EMAIL}</Link>
+          </p>
         </article>
       </section>
     </div>

@@ -2,27 +2,17 @@ import { defineCollection, z } from "astro:content";
 
 const noteCategories = [
   "paper-review",
-  "numerical-methods",
-  "control-systems",
-  "manufacturing",
-  "ai-engineering",
   "general",
 ] as const;
 
 const researchCategories = [
-  "mechanics",
-  "thermodynamics",
-  "controls",
-  "manufacturing",
-  "materials",
-  "computation",
+  "1",
+  "2",
 ] as const;
 
 const projectCategories = [
-  "engineering",
-  "hardware",
-  "software",
-  "capstone",
+  "1",
+  "2",
 ] as const;
 
 const publicationTypes = [

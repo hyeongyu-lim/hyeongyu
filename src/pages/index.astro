@@ -1,125 +1,28 @@
 ---
-import { getCollection } from "astro:content";
 import Container from "@components/Container.astro";
 import PageLayout from "@layouts/PageLayout.astro";
-import ArrowCard from "@components/ArrowCard.astro";
 import Link from "@components/Link.astro";
-import { SITE, HOME, SOCIALS, FEATURED_INTERESTS } from "@consts";
-
-const notes = (await getCollection("notes"))
-  .filter((post) => !post.data.draft)
-  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
-  .slice(0, SITE.NUM_NOTES_ON_HOMEPAGE);
-
-const projects = (await getCollection("projects"))
-  .filter((project) => !project.data.draft)
-  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
-  .slice(0, SITE.NUM_PROJECTS_ON_HOMEPAGE);
+import { SITE, HOME } from "@consts";
 ---
 
 <PageLayout title={HOME.TITLE} description={HOME.DESCRIPTION}>
   <Container>
-    <h4 class="animate font-semibold text-black dark:text-white">
-      Hello — I'm {SITE.NAME}
-    </h4>
-    <div class="space-y-16">
-      <section>
-        <article class="space-y-4">
-          <p class="animate">
-            {SITE.TAGLINE} student building a long-term academic portfolio for
-            coursework, research, and graduate study.
-          </p>
-          <p class="animate">
-            This site documents my projects, research interests, reading notes,
-            and publications as they develop over my undergraduate and graduate
-            studies.
-          </p>
-          <p class="animate">
-            <Link href="/about">About</Link>
-            {` · `}
-            <Link href="/cv">CV</Link>
-            {` · `}
-            <Link href="/research">Research interests</Link>
-          </p>
-        </article>
-      </section>
-
-      <section class="animate space-y-4">
-        <h5 class="font-semibold text-black dark:text-white">
-          Featured interests
-        </h5>
-        <ul class="list-disc list-inside font-serif space-y-1">
-          {
-            FEATURED_INTERESTS.map((interest) => (
-              <li>{interest}</li>
-            ))
-          }
-        </ul>
-      </section>
-
-      <section class="animate space-y-6">
-        <div class="flex flex-wrap gap-y-2 items-center justify-between">
-          <h5 class="font-semibold text-black dark:text-white">Recent notes</h5>
-          <Link href="/notes">All notes</Link>
-        </div>
-        <ul class="flex flex-col gap-4">
-          {
-            notes.map((post) => (
-              <li>
-                <ArrowCard entry={post} />
-              </li>
-            ))
-          }
-        </ul>
-      </section>
-
-      <section class="animate space-y-6">
-        <div class="flex flex-wrap gap-y-2 items-center justify-between">
-          <h5 class="font-semibold text-black dark:text-white">
-            Recent projects
-          </h5>
-          <Link href="/projects">All projects</Link>
-        </div>
-        <ul class="flex flex-col gap-4">
-          {
-            projects.map((project) => (
-              <li>
-                <ArrowCard entry={project} />
-              </li>
-            ))
-          }
-        </ul>
-      </section>
-
-      <section class="animate space-y-4">
-        <h5 class="font-semibold text-black dark:text-white">Contact</h5>
-        <article>
-          <p>
-            For academic inquiries, collaboration, or advising, reach out by
-            email or through the links below.
-          </p>
-        </article>
-        <ul class="flex flex-wrap gap-2">
-          {
-            SOCIALS.map((SOCIAL) => (
-              <li class="flex gap-x-2 text-nowrap">
-                <Link
-                  href={SOCIAL.HREF}
-                  external
-                  aria-label={`${SITE.NAME} on ${SOCIAL.NAME}`}
-                >
-                  {SOCIAL.NAME}
-                </Link>
-                {"/"}
-              </li>
-            ))
-          }
-          <li class="line-clamp-1">
-            <Link href={`mailto:${SITE.EMAIL}`} aria-label={`Email ${SITE.NAME}`}>
-              {SITE.EMAIL}
-            </Link>
-          </li>
-        </ul>
+    <div class="min-h-[50vh] flex flex-col justify-center">
+      <section class="space-y-6 max-w-xl">
+        <h1 class="animate text-3xl sm:text-4xl font-semibold tracking-tight text-black dark:text-white">
+          {SITE.NAME}
+        </h1>
+        <p class="animate font-serif text-lg text-black/80 dark:text-white/80">
+          {SITE.INSTITUTION}
+        </p>
+        <p class="animate">
+          <Link
+            href={`mailto:${SITE.EMAIL}`}
+            aria-label={`Email ${SITE.NAME}`}
+          >
+            {SITE.EMAIL}
+          </Link>
+        </p>
       </section>
     </div>
   </Container>

@@ -3,6 +3,8 @@ import { getCollection } from "astro:content";
 import PageLayout from "@layouts/PageLayout.astro";
 import Container from "@components/Container.astro";
 import Link from "@components/Link.astro";
+import EmptySlot from "@components/EmptySlot.astro";
+import ContentHint from "@components/ContentHint.astro";
 import { RESEARCH } from "@consts";
 import { researchCategories } from "@content/config";
 import { RESEARCH_CATEGORY_LABELS } from "@lib/labels";
@@ -28,30 +30,28 @@ const byCategory = researchCategories.map((category) => ({
           Research interests
         </h1>
         <p class="text-sm">
-          Topics are organized by category. Add entries under
-          <code class="font-sans text-xs">src/content/research/</code>. Markdown
-          supports LaTeX, e.g. $\sigma = E \varepsilon$.
+          Markdown supports LaTeX, e.g. $\sigma = E \varepsilon$.
         </p>
+        <ContentHint contentPath="src/content/research/" />
       </div>
 
       {
-        byCategory.map(
-          ({ label, items }) =>
-            items.length > 0 && (
-              <section class="animate space-y-4">
-                <h2 class="font-semibold text-black dark:text-white">{label}</h2>
-                <ul class="flex flex-col gap-3">
-                  {
-                    items.map((item) => (
-                      <li>
-                        <Link href={`/research/${item.slug}`}>{item.data.title}</Link>
-                      </li>
-                    ))
-                  }
-                </ul>
-              </section>
-            ),
-        )
+        byCategory.map(({ label, items }) => (
+          <section class="animate space-y-4">
+            <h2 class="font-semibold text-black dark:text-white">{label}</h2>
+            {items.length > 0 ? (
+              <ul class="flex flex-col gap-3">
+                {items.map((item) => (
+                  <li>
+                    <Link href={`/research/${item.slug}`}>{item.data.title}</Link>
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <EmptySlot />
+            )}
+          </section>
+        ))
       }
     </div>
   </Container>

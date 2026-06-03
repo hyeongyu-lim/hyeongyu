@@ -3,6 +3,8 @@ import { type CollectionEntry, getCollection } from "astro:content";
 import PageLayout from "@layouts/PageLayout.astro";
 import Container from "@components/Container.astro";
 import ArrowCard from "@components/ArrowCard.astro";
+import EmptySlot from "@components/EmptySlot.astro";
+import ContentHint from "@components/ContentHint.astro";
 import { NOTES } from "@consts";
 import { noteCategories } from "@content/config";
 import { NOTE_CATEGORY_LABELS } from "@lib/labels";
@@ -11,13 +13,11 @@ const data = (await getCollection("notes"))
   .filter((post) => !post.data.draft)
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 
-const byCategory = noteCategories
-  .map((category) => ({
-    category,
-    label: NOTE_CATEGORY_LABELS[category],
-    posts: data.filter((p) => p.data.category === category),
-  }))
-  .filter((group) => group.posts.length > 0);
+const byCategory = noteCategories.map((category) => ({
+  category,
+  label: NOTE_CATEGORY_LABELS[category],
+  posts: data.filter((p) => p.data.category === category),
+}));
 
 type Acc = { [year: string]: CollectionEntry<"notes">[] };
 
@@ -36,10 +36,7 @@ const years = Object.keys(byYear).sort((a, b) => parseInt(b) - parseInt(a));
     <div class="space-y-10">
       <div class="animate space-y-3">
         <h1 class="font-semibold text-black dark:text-white">Research notes</h1>
-        <p class="text-sm">
-          Knowledge base in Markdown — add files under
-          <code class="font-sans text-xs">src/content/notes/</code>.
-        </p>
+        <ContentHint contentPath="src/content/notes/" />
       </div>
 
       <section class="animate space-y-6">
@@ -51,13 +48,17 @@ const years = Object.keys(byYear).sort((a, b) => parseInt(b) - parseInt(a));
                 <h3 class="text-sm font-semibold text-black dark:text-white">
                   {label}
                 </h3>
-                <ul class="flex flex-col gap-4">
-                  {posts.map((post) => (
-                    <li>
-                      <ArrowCard entry={post} />
-                    </li>
-                  ))}
-                </ul>
+                {posts.length > 0 ? (
+                  <ul class="flex flex-col gap-4">
+                    {posts.map((post) => (
+                      <li>
+                        <ArrowCard entry={post} />
+                      </li>
+                    ))}
+                  </ul>
+                ) : (
+                  <EmptySlot />
+                )}
               </div>
             ))
           }
@@ -67,18 +68,22 @@ const years = Object.keys(byYear).sort((a, b) => parseInt(b) - parseInt(a));
       <section class="animate space-y-6">
         <h2 class="font-semibold text-black dark:text-white">By year</h2>
         {
-          years.map((year) => (
-            <div class="space-y-4">
-              <h3 class="font-semibold text-black dark:text-white">{year}</h3>
-              <ul class="flex flex-col gap-4">
-                {byYear[year].map((post) => (
-                  <li>
-                    <ArrowCard entry={post} />
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))
+          years.length > 0 ? (
+            years.map((year) => (
+              <div class="space-y-4">
+                <h3 class="font-semibold text-black dark:text-white">{year}</h3>
+                <ul class="flex flex-col gap-4">
+                  {byYear[year].map((post) => (
+                    <li>
+                      <ArrowCard entry={post} />
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))
+          ) : (
+            <EmptySlot />
+          )
         }
       </section>
     </div>

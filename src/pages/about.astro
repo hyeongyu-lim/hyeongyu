@@ -1,8 +1,8 @@
 ---
 import Container from "@components/Container.astro";
 import PageLayout from "@layouts/PageLayout.astro";
-import Link from "@components/Link.astro";
-import { ABOUT } from "@consts";
+import EmptySlot from "@components/EmptySlot.astro";
+import { ABOUT, SITE } from "@consts";
 ---
 
 <PageLayout title={ABOUT.TITLE} description={ABOUT.DESCRIPTION}>
@@ -14,11 +14,9 @@ import { ABOUT } from "@consts";
         <h2 class="font-semibold text-black dark:text-white">
           Academic background
         </h2>
-        <article class="space-y-3">
+        <article class="space-y-2 font-serif text-black/80 dark:text-white/80">
           <p>
-            B.S. in Mechanical Engineering (in progress). Update this section
-            with your institution, expected graduation year, relevant coursework,
-            and honors.
+            {SITE.DEGREE}, {SITE.TAGLINE} — {SITE.INSTITUTION} ({SITE.EDUCATION_PERIOD})
           </p>
         </article>
       </section>
@@ -26,12 +24,7 @@ import { ABOUT } from "@consts";
       <section class="animate space-y-4">
         <h2 class="font-semibold text-black dark:text-white">Technical skills</h2>
         <article>
-          <ul class="list-disc list-inside font-serif space-y-1">
-            <li>Programming: Python, MATLAB, C++ (adjust to your stack)</li>
-            <li>Simulation: FEA, CFD, multibody dynamics (as applicable)</li>
-            <li>Design: CAD, drafting standards, prototyping</li>
-            <li>Lab: measurement, data acquisition, uncertainty analysis</li>
-          </ul>
+          <EmptySlot />
         </article>
       </section>
 
@@ -40,22 +33,14 @@ import { ABOUT } from "@consts";
           Engineering interests
         </h2>
         <article>
-          <p>
-            Solid mechanics, dynamics and control, thermal systems, and
-            computational methods. See
-            <Link href="/research">Research interests</Link> for organized topics.
-          </p>
+          <EmptySlot />
         </article>
       </section>
 
       <section class="animate space-y-4">
         <h2 class="font-semibold text-black dark:text-white">Future goals</h2>
         <article>
-          <p>
-            Pursue graduate study in mechanical engineering, contribute to
-            experimental and computational research, and prepare for doctoral
-            applications in my areas of interest.
-          </p>
+          <EmptySlot />
         </article>
       </section>
     </div>

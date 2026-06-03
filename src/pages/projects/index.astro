@@ -3,6 +3,8 @@ import { getCollection } from "astro:content";
 import PageLayout from "@layouts/PageLayout.astro";
 import Container from "@components/Container.astro";
 import ArrowCard from "@components/ArrowCard.astro";
+import EmptySlot from "@components/EmptySlot.astro";
+import ContentHint from "@components/ContentHint.astro";
 import { PROJECTS } from "@consts";
 import { projectCategories } from "@content/config";
 import { PROJECT_CATEGORY_LABELS } from "@lib/labels";
@@ -11,31 +13,36 @@ const projects = (await getCollection("projects"))
   .filter((project) => !project.data.draft)
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 
-const byCategory = projectCategories
-  .map((category) => ({
-    category,
-    label: PROJECT_CATEGORY_LABELS[category],
-    items: projects.filter((p) => p.data.category === category),
-  }))
-  .filter((group) => group.items.length > 0);
+const byCategory = projectCategories.map((category) => ({
+  category,
+  label: PROJECT_CATEGORY_LABELS[category],
+  items: projects.filter((p) => p.data.category === category),
+}));
 ---
 
 <PageLayout title={PROJECTS.TITLE} description={PROJECTS.DESCRIPTION}>
   <Container>
     <div class="space-y-10">
-      <div class="animate font-semibold text-black dark:text-white">Projects</div>
+      <div class="animate space-y-3">
+        <h1 class="font-semibold text-black dark:text-white">Projects</h1>
+        <ContentHint contentPath="src/content/projects/" />
+      </div>
 
       {
         byCategory.map(({ label, items }) => (
           <section class="animate space-y-4">
             <h2 class="font-semibold text-black dark:text-white">{label}</h2>
-            <ul class="flex flex-col gap-4">
-              {items.map((project) => (
-                <li>
-                  <ArrowCard entry={project} />
-                </li>
-              ))}
-            </ul>
+            {items.length > 0 ? (
+              <ul class="flex flex-col gap-4">
+                {items.map((project) => (
+                  <li>
+                    <ArrowCard entry={project} />
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <EmptySlot />
+            )}
           </section>
         ))
       }

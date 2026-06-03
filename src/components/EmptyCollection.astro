@@ -1,0 +1,12 @@
+---
+type Props = {
+  contentPath: string;
+};
+
+const { contentPath } = Astro.props;
+---
+
+<p class="text-sm text-black/60 dark:text-white/60 font-serif">
+  No entries yet. Add Markdown under
+  <code class="font-sans text-xs">{contentPath}</code>.
+</p>
