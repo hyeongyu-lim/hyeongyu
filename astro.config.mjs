@@ -1,5 +1,4 @@
 import { defineConfig } from "astro/config";
-import content from "@astrojs/content";
 import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
 import tailwind from "@astrojs/tailwind";
@@ -39,7 +38,7 @@ const { site, base } = githubPagesConfig();
 export default defineConfig({
   site,
   base,
-  integrations: [content(), mdx(), sitemap(), tailwind()],
+  integrations: [mdx(), sitemap(), tailwind()],
   markdown: {
     remarkPlugins: [remarkMath],
     rehypePlugins: [rehypeKatex],

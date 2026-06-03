@@ -2,10 +2,11 @@
   "name": "academic-portfolio",
   "type": "module",
   "version": "1.0.0",
+  "packageManager": "pnpm@9.10.0",
   "scripts": {
     "dev": "astro dev",
     "dev:network": "astro dev --host",
-    "build": "astro check && astro build",
+    "build": "astro build",
     "preview": "astro preview",
     "preview:network": "astro preview --host",
     "astro": "astro",
@@ -14,7 +15,6 @@
   },
   "dependencies": {
     "@astrojs/check": "^0.9.4",
-    "@astrojs/content": "^3.0.0",
     "@astrojs/mdx": "^4.0.2",
     "@astrojs/rss": "^4.0.10",
     "@astrojs/sitemap": "^3.2.1",

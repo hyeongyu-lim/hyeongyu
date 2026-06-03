@@ -22,15 +22,18 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 22
+          node-version: 20
           cache: "pnpm"
           cache-dependency-path: pnpm-lock.yaml
+
+      - name: Use pnpm 9
+        run: corepack prepare pnpm@9.10.0 --activate
 
       - name: Install dependencies
         run: corepack pnpm install --frozen-lockfile
 
       - name: Check and build
-        run: corepack pnpm exec npm run build
+        run: corepack pnpm build
         env:
           ASTRO_TELEMETRY_DISABLED: "1"
           # Simulate project-site paths when not running on github.com
